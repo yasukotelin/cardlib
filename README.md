@@ -1,3 +1,3 @@
 # cardlib
 
-Go製のトランプカードライブラリ
+cardlib is library for playing card.
