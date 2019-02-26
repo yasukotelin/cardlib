@@ -7,8 +7,8 @@ import (
 	"github.com/yasukotelin/cardlib/suit"
 )
 
-func TestNewDeck(t *testing.T) {
-	deck := NewDeck()
+func TestMake(t *testing.T) {
+	deck := Make()
 
 	if deck.Number != len(deck.Cards) {
 		t.Fatalf("Faital, deck.Number is %v but len(deck.Cards) is %v", deck.Number, len(deck.Cards))
@@ -23,8 +23,24 @@ func TestNewDeck(t *testing.T) {
 	}
 }
 
+func TestMakeSuitSet(t *testing.T) {
+	deck := MakeSuitSet(suit.Heart)
+
+	if deck.Number != len(deck.Cards) {
+		t.Fatalf("Faital, deck.Number is %v but len(deck.Cards) is %v", deck.Number, len(deck.Cards))
+	}
+
+	c := card.Card{
+		Suit:   suit.Heart,
+		Number: 1,
+	}
+	if deck.Cards[0] != c {
+		t.Fatalf("Faital, expected Suit is %v, Number is %v but actual is %v, %v", c.Suit, c.Number, deck.Cards[0].Suit, deck.Cards[0].Number)
+	}
+}
+
 func TestRemoveJoker1(t *testing.T) {
-	deck := NewDeck()
+	deck := Make()
 
 	deck.RemoveJoker()
 
@@ -36,7 +52,7 @@ func TestRemoveJoker1(t *testing.T) {
 }
 
 func TestRemoveJoker2(t *testing.T) {
-	deck := NewDeck()
+	deck := Make()
 
 	exp := deck.Number - 2
 

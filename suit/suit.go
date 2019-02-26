@@ -9,7 +9,8 @@ const (
 	Heart
 	Joker
 
-	SuitNum = 4
+	// JokerNum is defined number for joker
+	JokerNum = 14
 )
 
 func (s Suit) String() string {
@@ -39,9 +40,9 @@ func (s Suit) Mark() string {
 	case Diamond:
 		return "♦"
 	case Heart:
-		return "❤"
+		return "♥"
 	case Joker:
-		return ""
+		return "Joker"
 	default:
 		return ""
 	}

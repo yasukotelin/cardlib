@@ -5,27 +5,36 @@ import (
 	"github.com/yasukotelin/cardlib/suit"
 )
 
-// Deck is complete cards struct.
+const (
+	// SuitSetNum is max number of suit set
+	SuitSetNum = 13
+	// SuitKindNum is number of kind of suit
+	SuitKindNum = 4
+	// JokerNum is max number of joker in deck
+	JokerNum = 2
+)
+
+// Deck is card set struct.
 type Deck struct {
 	Cards  []card.Card
 	Number int
 }
 
-// NewDeck create deck.
-func NewDeck() *Deck {
+// Make returns complete new deck
+func Make() *Deck {
 	var cards []card.Card
-	for i := 0; i < suit.SuitNum; i++ {
-		for j := 1; j <= 13; j++ {
+	for i := 0; i < SuitKindNum; i++ {
+		for j := 1; j <= SuitSetNum; j++ {
 			cards = append(cards, card.Card{
 				Suit:   suit.Suit(i),
 				Number: j,
 			})
 		}
 	}
-	for i := 0; i < 2; i++ {
+	for i := 0; i < JokerNum; i++ {
 		cards = append(cards, card.Card{
 			Suit:   suit.Joker,
-			Number: 0,
+			Number: suit.JokerNum,
 		})
 	}
 	return &Deck{
@@ -34,6 +43,22 @@ func NewDeck() *Deck {
 	}
 }
 
+// MakeSuitSet returns new deck maked only suit of arg
+func MakeSuitSet(suit suit.Suit) *Deck {
+	var cards []card.Card
+	for i := 1; i <= SuitSetNum; i++ {
+		cards = append(cards, card.Card{
+			Suit:   suit,
+			Number: i,
+		})
+	}
+	return &Deck{
+		Cards:  cards,
+		Number: SuitSetNum,
+	}
+}
+
+// RemoveJoker is remove all joker from deck
 func (d *Deck) RemoveJoker() {
 	var rmCount int
 	var cards []card.Card
