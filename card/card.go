@@ -13,14 +13,11 @@ type Card struct {
 	Number int
 }
 
-func (c *Card) String(mark bool) string {
+func (c *Card) String() string {
 	if c.Suit == suit.Joker {
 		return c.Suit.Mark()
 	}
-	if mark {
-		return fmt.Sprintf("%v%v", c.Suit.Mark(), c.GetStrNumber())
-	}
-	return fmt.Sprintf("(%v)%v", c.Suit.String(), c.GetStrNumber())
+	return fmt.Sprintf("%v%v", c.Suit.Mark(), c.GetStrNumber())
 }
 
 // GetStrNumber return card string number.

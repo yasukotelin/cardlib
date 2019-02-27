@@ -13,7 +13,7 @@ func TestString1(t *testing.T) {
 	}
 
 	exp := "♦A"
-	act := c.String(true)
+	act := c.String()
 
 	if exp != act {
 		t.Fatalf("Fatail, expected is %s actual is %s", exp, act)
@@ -27,7 +27,7 @@ func TestString2(t *testing.T) {
 	}
 
 	exp := "♥10"
-	act := c.String(true)
+	act := c.String()
 
 	if exp != act {
 		t.Fatalf("Fatail, expected is %s actual is %s", exp, act)
@@ -41,7 +41,7 @@ func TestString3(t *testing.T) {
 	}
 
 	exp := "Joker"
-	act := c.String(true)
+	act := c.String()
 
 	if exp != act {
 		t.Fatalf("Fatail, expected is %s actual is %s", exp, act)

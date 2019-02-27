@@ -1,5 +1,9 @@
 package suit
 
+import (
+	"github.com/kyokomi/emoji"
+)
+
 type Suit int
 
 const (
@@ -13,8 +17,8 @@ const (
 	JokerNum = 14
 )
 
-func (s Suit) String() string {
-	switch s {
+func (s *Suit) String() string {
+	switch *s {
 	case Spade:
 		return "Spade"
 	case Club:
@@ -31,18 +35,18 @@ func (s Suit) String() string {
 }
 
 // Mark return Suit mark by Unicode Emoji
-func (s Suit) Mark() string {
-	switch s {
+func (s *Suit) Mark() string {
+	switch *s {
 	case Spade:
-		return "♠"
+		return emoji.Sprint(":spades:")
 	case Club:
-		return "♣"
+		return emoji.Sprint(":clubs:")
 	case Diamond:
-		return "♦"
+		return emoji.Sprint(":diamonds:")
 	case Heart:
-		return "♥"
+		return emoji.Sprint(":hearts:")
 	case Joker:
-		return "Joker"
+		return emoji.Sprint(":black_joker:")
 	default:
 		return ""
 	}

@@ -10,7 +10,7 @@ func main() {
 	d := deck.Make()
 
 	for _, c := range d.Cards {
-		fmt.Println(c.String(true))
+		fmt.Println(c.String())
 	}
 
 	fmt.Println("==========")
@@ -19,6 +19,6 @@ func main() {
 	fmt.Println("==========")
 
 	for _, c := range d.Cards {
-		fmt.Println(c.String(true))
+		fmt.Println(c.String())
 	}
 }
