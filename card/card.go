@@ -15,7 +15,7 @@ type Card struct {
 
 func (c *Card) String() string {
 	if c.Suit == suit.Joker {
-		return c.Suit.Mark()
+		return fmt.Sprintf("%v%v", c.Suit.Mark(), c.Suit.String())
 	}
 	return fmt.Sprintf("%v%v", c.Suit.Mark(), c.GetStrNumber())
 }
