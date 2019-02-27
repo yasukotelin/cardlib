@@ -10,10 +10,6 @@ import (
 func TestMake(t *testing.T) {
 	deck := Make()
 
-	if deck.Number != len(deck.Cards) {
-		t.Fatalf("Faital, deck.Number is %v but len(deck.Cards) is %v", deck.Number, len(deck.Cards))
-	}
-
 	c := card.Card{
 		Suit:   suit.Spade,
 		Number: 1,
@@ -25,10 +21,6 @@ func TestMake(t *testing.T) {
 
 func TestMakeSuitSet(t *testing.T) {
 	deck := MakeSuitSet(suit.Heart)
-
-	if deck.Number != len(deck.Cards) {
-		t.Fatalf("Faital, deck.Number is %v but len(deck.Cards) is %v", deck.Number, len(deck.Cards))
-	}
 
 	c := card.Card{
 		Suit:   suit.Heart,
@@ -48,18 +40,5 @@ func TestRemoveJoker1(t *testing.T) {
 		if c.Suit == suit.Joker {
 			t.Fatalf("Faital, Could not remove joker from deck.")
 		}
-	}
-}
-
-func TestRemoveJoker2(t *testing.T) {
-	deck := Make()
-
-	exp := deck.Number - 2
-
-	deck.RemoveJoker()
-	act := deck.Number
-
-	if exp != act {
-		t.Fatalf("Faital, expected is %v actual is %v", exp, act)
 	}
 }

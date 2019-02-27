@@ -1,6 +1,7 @@
 package card
 
 import (
+	"fmt"
 	"strconv"
 
 	"github.com/yasukotelin/cardlib/suit"
@@ -10,6 +11,16 @@ import (
 type Card struct {
 	Suit   suit.Suit
 	Number int
+}
+
+func (c *Card) String(mark bool) string {
+	if c.Suit == suit.Joker {
+		return c.Suit.Mark()
+	}
+	if mark {
+		return fmt.Sprintf("%v%v", c.Suit.Mark(), c.GetStrNumber())
+	}
+	return fmt.Sprintf("(%v)%v", c.Suit.String(), c.GetStrNumber())
 }
 
 // GetStrNumber return card string number.

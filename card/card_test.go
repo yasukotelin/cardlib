@@ -1,6 +1,52 @@
 package card
 
-import "testing"
+import (
+	"testing"
+
+	"github.com/yasukotelin/cardlib/suit"
+)
+
+func TestString1(t *testing.T) {
+	c := Card{
+		Number: 1,
+		Suit:   suit.Diamond,
+	}
+
+	exp := "♦A"
+	act := c.String(true)
+
+	if exp != act {
+		t.Fatalf("Fatail, expected is %s actual is %s", exp, act)
+	}
+}
+
+func TestString2(t *testing.T) {
+	c := Card{
+		Number: 10,
+		Suit:   suit.Heart,
+	}
+
+	exp := "♥10"
+	act := c.String(true)
+
+	if exp != act {
+		t.Fatalf("Fatail, expected is %s actual is %s", exp, act)
+	}
+}
+
+func TestString3(t *testing.T) {
+	c := Card{
+		Number: suit.JokerNum,
+		Suit:   suit.Joker,
+	}
+
+	exp := "Joker"
+	act := c.String(true)
+
+	if exp != act {
+		t.Fatalf("Fatail, expected is %s actual is %s", exp, act)
+	}
+}
 
 func TestGetStrNumber1(t *testing.T) {
 	c := Card{

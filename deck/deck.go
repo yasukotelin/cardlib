@@ -1,6 +1,8 @@
 package deck
 
 import (
+	"math/rand"
+
 	"github.com/yasukotelin/cardlib/card"
 	"github.com/yasukotelin/cardlib/suit"
 )
@@ -16,8 +18,7 @@ const (
 
 // Deck is card set struct.
 type Deck struct {
-	Cards  []card.Card
-	Number int
+	Cards []card.Card
 }
 
 // Make returns complete new deck
@@ -38,8 +39,7 @@ func Make() *Deck {
 		})
 	}
 	return &Deck{
-		Cards:  cards,
-		Number: 54,
+		Cards: cards,
 	}
 }
 
@@ -53,8 +53,7 @@ func MakeSuitSet(suit suit.Suit) *Deck {
 		})
 	}
 	return &Deck{
-		Cards:  cards,
-		Number: SuitSetNum,
+		Cards: cards,
 	}
 }
 
@@ -70,5 +69,13 @@ func (d *Deck) RemoveJoker() {
 		}
 	}
 	d.Cards = cards
-	d.Number -= rmCount
+}
+
+// Shuffle the deck. The algorythm using is Fisher–Yates shuffle
+func (d *Deck) Shuffle() {
+	n := len(d.Cards)
+	for i := n - 1; i >= 0; i-- {
+		j := rand.Intn(i + 1)
+		d.Cards[i], d.Cards[j] = d.Cards[j], d.Cards[i]
+	}
 }
