@@ -3,6 +3,7 @@ package card
 import (
 	"testing"
 
+	"github.com/kyokomi/emoji"
 	"github.com/yasukotelin/cardlib/suit"
 )
 
@@ -12,7 +13,7 @@ func TestString1(t *testing.T) {
 		Suit:   suit.Diamond,
 	}
 
-	exp := "♦A"
+	exp := emoji.Sprint(":diamonds:A")
 	act := c.String()
 
 	if exp != act {
@@ -26,7 +27,7 @@ func TestString2(t *testing.T) {
 		Suit:   suit.Heart,
 	}
 
-	exp := "♥10"
+	exp := emoji.Sprint(":hearts:10")
 	act := c.String()
 
 	if exp != act {
@@ -40,7 +41,7 @@ func TestString3(t *testing.T) {
 		Suit:   suit.Joker,
 	}
 
-	exp := "Joker"
+	exp := emoji.Sprint(":black_joker:Joker")
 	act := c.String()
 
 	if exp != act {

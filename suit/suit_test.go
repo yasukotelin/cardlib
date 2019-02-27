@@ -1,6 +1,9 @@
 package suit
 
-import "testing"
+import (
+	"testing"
+	"github.com/kyokomi/emoji"
+)
 
 func TestSuitString(t *testing.T) {
 	s := Spade
@@ -16,7 +19,7 @@ func TestSuitString(t *testing.T) {
 func TestSuitMark(t *testing.T) {
 	s := Spade
 
-	exp := "♠"
+	exp := emoji.Sprint(":spades:")
 	act := s.Mark()
 
 	if exp != act {
