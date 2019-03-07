@@ -1,16 +1,15 @@
-package card
+package cardlib
 
 import (
 	"testing"
 
 	"github.com/kyokomi/emoji"
-	"github.com/yasukotelin/cardlib/suit"
 )
 
 func TestString1(t *testing.T) {
 	c := Card{
 		Number: 1,
-		Suit:   suit.Diamond,
+		Suit:   Diamond,
 	}
 
 	exp := emoji.Sprint(":diamonds:A")
@@ -24,7 +23,7 @@ func TestString1(t *testing.T) {
 func TestString2(t *testing.T) {
 	c := Card{
 		Number: 10,
-		Suit:   suit.Heart,
+		Suit:   Heart,
 	}
 
 	exp := emoji.Sprint(":hearts:10")
@@ -37,8 +36,8 @@ func TestString2(t *testing.T) {
 
 func TestString3(t *testing.T) {
 	c := Card{
-		Number: suit.JokerNum,
-		Suit:   suit.Joker,
+		Number: 0,
+		Suit:   Joker,
 	}
 
 	exp := emoji.Sprint(":black_joker:Joker")

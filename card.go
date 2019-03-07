@@ -1,20 +1,18 @@
-package card
+package cardlib
 
 import (
 	"fmt"
 	"strconv"
-
-	"github.com/yasukotelin/cardlib/suit"
 )
 
 // Card is struct
 type Card struct {
-	Suit   suit.Suit
+	Suit   Suit
 	Number int
 }
 
 func (c *Card) String() string {
-	if c.Suit == suit.Joker {
+	if c.Suit == Joker {
 		return fmt.Sprintf("%v%v", c.Suit.Mark(), c.Suit.String())
 	}
 	return fmt.Sprintf("%v%v", c.Suit.Mark(), c.GetStrNumber())

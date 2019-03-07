@@ -1,42 +1,36 @@
-package deck
+package cardlib
 
 import (
 	"math/rand"
 	"time"
-
-	"github.com/yasukotelin/cardlib/card"
-	"github.com/yasukotelin/cardlib/suit"
 )
 
 const (
-	// SuitSetNum is max number of suit set
-	SuitSetNum = 13
-	// SuitKindNum is number of kind of suit
-	SuitKindNum = 4
-	// JokerNum is max number of joker in deck
-	JokerNum = 2
+	suitSetNum  = 13
+	jokerNum    = 2
+	suitKindNum = 4
 )
 
 // Deck is card set struct.
 type Deck struct {
-	Cards []card.Card
+	Cards []Card
 }
 
 // Make returns complete new deck
 func Make() *Deck {
-	var cards []card.Card
-	for i := 0; i < SuitKindNum; i++ {
-		for j := 1; j <= SuitSetNum; j++ {
-			cards = append(cards, card.Card{
-				Suit:   suit.Suit(i),
+	var cards []Card
+	for i := 0; i < suitKindNum; i++ {
+		for j := 1; j <= suitSetNum; j++ {
+			cards = append(cards, Card{
+				Suit:   Suit(i),
 				Number: j,
 			})
 		}
 	}
-	for i := 0; i < JokerNum; i++ {
-		cards = append(cards, card.Card{
-			Suit:   suit.Joker,
-			Number: suit.JokerNum,
+	for i := 0; i < jokerNum; i++ {
+		cards = append(cards, Card{
+			Suit:   Joker,
+			Number: 0,
 		})
 	}
 	return &Deck{
@@ -45,10 +39,10 @@ func Make() *Deck {
 }
 
 // MakeSuitSet returns new deck maked only suit of arg
-func MakeSuitSet(suit suit.Suit) *Deck {
-	var cards []card.Card
-	for i := 1; i <= SuitSetNum; i++ {
-		cards = append(cards, card.Card{
+func MakeSuitSet(suit Suit) *Deck {
+	var cards []Card
+	for i := 1; i <= suitSetNum; i++ {
+		cards = append(cards, Card{
 			Suit:   suit,
 			Number: i,
 		})
@@ -61,9 +55,9 @@ func MakeSuitSet(suit suit.Suit) *Deck {
 // RemoveJoker is remove all joker from deck
 func (d *Deck) RemoveJoker() {
 	var rmCount int
-	var cards []card.Card
+	var cards []Card
 	for _, c := range d.Cards {
-		if c.Suit != suit.Joker {
+		if c.Suit != Joker {
 			cards = append(cards, c)
 		} else {
 			rmCount++
@@ -91,7 +85,7 @@ func (d *Deck) Shuffle() {
 }
 
 // Draw top card from deck. Top card is 0 index of cards slice.
-func (d *Deck) Draw() *card.Card {
+func (d *Deck) Draw() *Card {
 	c := d.Cards[d.TopIndex()]
 	d.Cards = d.Cards[1:len(d.Cards)]
 	return &c

@@ -1,29 +1,26 @@
-package deck
+package cardlib
 
 import (
 	"testing"
-
-	"github.com/yasukotelin/cardlib/card"
-	"github.com/yasukotelin/cardlib/suit"
 )
 
 func TestMake(t *testing.T) {
 	deck := Make()
 
-	c := card.Card{
-		Suit:   suit.Spade,
+	c := Card{
+		Suit:   Spade,
 		Number: 1,
 	}
 	if deck.Cards[0] != c {
-		t.Fatalf("Faital, expected Suit is Spade, Number is 1 but actual is %v, %v", deck.Cards[0].Suit, deck.Cards[0].Number)
+		t.Fatalf("Faital, expected Suit is Spade, Number is 1 but actual is %v, %v", deck.Cards[0].Suit.Mark(), deck.Cards[0].Number)
 	}
 }
 
 func TestMakeSuitSet(t *testing.T) {
-	deck := MakeSuitSet(suit.Heart)
+	deck := MakeSuitSet(Heart)
 
-	c := card.Card{
-		Suit:   suit.Heart,
+	c := Card{
+		Suit:   Heart,
 		Number: 1,
 	}
 	if deck.Cards[0] != c {
@@ -37,7 +34,7 @@ func TestRemoveJoker1(t *testing.T) {
 	deck.RemoveJoker()
 
 	for _, c := range deck.Cards {
-		if c.Suit == suit.Joker {
+		if c.Suit == Joker {
 			t.Fatalf("Faital, Could not remove joker from deck.")
 		}
 	}

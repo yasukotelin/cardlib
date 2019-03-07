@@ -1,7 +1,8 @@
-package suit
+package cardlib
 
 import (
 	"testing"
+
 	"github.com/kyokomi/emoji"
 )
 
