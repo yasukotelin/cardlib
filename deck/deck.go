@@ -2,6 +2,7 @@ package deck
 
 import (
 	"math/rand"
+	"time"
 
 	"github.com/yasukotelin/cardlib/card"
 	"github.com/yasukotelin/cardlib/suit"
@@ -71,11 +72,27 @@ func (d *Deck) RemoveJoker() {
 	d.Cards = cards
 }
 
+func (d *Deck) TopIndex() int {
+	return 0
+}
+
+func (d *Deck) BottomIndex() int {
+	return len(d.Cards) - 1
+}
+
 // Shuffle the deck. The algorythm using is Fisher–Yates shuffle
 func (d *Deck) Shuffle() {
+	rand.Seed(time.Now().UnixNano())
 	n := len(d.Cards)
 	for i := n - 1; i >= 0; i-- {
 		j := rand.Intn(i + 1)
 		d.Cards[i], d.Cards[j] = d.Cards[j], d.Cards[i]
 	}
+}
+
+// Draw top card from deck. Top card is 0 index of cards slice.
+func (d *Deck) Draw() *card.Card {
+	c := d.Cards[d.TopIndex()]
+	d.Cards = d.Cards[1:len(d.Cards)]
+	return &c
 }

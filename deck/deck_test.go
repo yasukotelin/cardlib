@@ -42,3 +42,20 @@ func TestRemoveJoker1(t *testing.T) {
 		}
 	}
 }
+
+func TestDraw(t *testing.T) {
+	deck := Make()
+
+	expNum := len(deck.Cards) - 1
+	expCard := deck.Cards[deck.TopIndex()]
+
+	c := deck.Draw()
+
+	if len(deck.Cards) != expNum {
+		t.Errorf("number of after drawing card from deck be should %d. but actualy is %d", expNum, len(deck.Cards))
+	}
+
+	if *c != expCard {
+		t.Errorf("card is should be %v. but actual is %v", expCard, c)
+	}
+}

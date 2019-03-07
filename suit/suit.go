@@ -12,7 +12,9 @@ const (
 	Diamond
 	Heart
 	Joker
+)
 
+const (
 	// JokerNum is defined number for joker
 	JokerNum = 14
 )

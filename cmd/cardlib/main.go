@@ -7,14 +7,30 @@ import (
 	"github.com/yasukotelin/cardlib/deck"
 )
 
+const (
+	gopher = "ʕ◔ϖ◔ʔ"
+)
+
 func main() {
-	fmt.Println("\nʕ◔ϖ◔ʔ > Make new deck!")
+	fmt.Printf("\n%v > Make new deck!\n", gopher)
 	d := deck.Make()
 	printlnAllCards(&d.Cards)
 
-	fmt.Println("\nʕ◔ϖ◔ʔ > shuffle shuffle")
+	fmt.Printf("\n%v > shuffle shuffle\n", gopher)
 	d.Shuffle()
 	printlnAllCards(&d.Cards)
+
+	fmt.Printf("\n%v > Draw!!\n", gopher)
+	c := d.Draw()
+	fmt.Println(c.String())
+
+	fmt.Printf("\n%v > Remove joker\n", gopher)
+	d.RemoveJoker()
+	printlnAllCards(&d.Cards)
+
+	fmt.Printf("\n%v > Draw!!\n", gopher)
+	c = d.Draw()
+	fmt.Println(c.String())
 }
 
 func printlnAllCards(cards *[]card.Card) {
