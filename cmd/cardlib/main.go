@@ -3,8 +3,7 @@ package main
 import (
 	"fmt"
 
-	"github.com/yasukotelin/cardlib/card"
-	"github.com/yasukotelin/cardlib/deck"
+	"github.com/yasukotelin/cardlib"
 )
 
 const (
@@ -13,7 +12,7 @@ const (
 
 func main() {
 	fmt.Printf("\n%v > Make new deck!\n", gopher)
-	d := deck.Make()
+	d := cardlib.Make()
 	printlnAllCards(&d.Cards)
 
 	fmt.Printf("\n%v > shuffle shuffle\n", gopher)
@@ -33,11 +32,11 @@ func main() {
 	fmt.Println(c.String())
 }
 
-func printlnAllCards(cards *[]card.Card) {
+func printlnAllCards(cards *[]cardlib.Card) {
 	fmt.Println("----------------------------------------------------")
 	for i, c := range *cards {
 		fmt.Print(c.String())
-		if (i+1)%deck.SuitSetNum == 0 {
+		if (i+1)%13 == 0 {
 			fmt.Println()
 		} else {
 			fmt.Print(" ")
