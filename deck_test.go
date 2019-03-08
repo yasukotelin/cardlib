@@ -28,18 +28,6 @@ func TestMakeSuitSet(t *testing.T) {
 	}
 }
 
-func TestRemoveJoker1(t *testing.T) {
-	deck := Make()
-
-	deck.RemoveJoker()
-
-	for _, c := range deck.Cards {
-		if c.Suit == Joker {
-			t.Fatalf("Faital, Could not remove joker from deck.")
-		}
-	}
-}
-
 func TestDraw(t *testing.T) {
 	deck := Make()
 
@@ -54,5 +42,39 @@ func TestDraw(t *testing.T) {
 
 	if *c != expCard {
 		t.Errorf("card is should be %v. but actual is %v", expCard, c)
+	}
+}
+
+func TestDrawAt(t *testing.T) {
+	deck := Make()
+
+	act, err := deck.DrawAt(12)
+	exp := Card{
+		Number: 13,
+		Suit:   Spade,
+	}
+
+	if err != nil {
+		t.Errorf("error should be nil. but actual is %v", err)
+	}
+
+	if *act != exp {
+		t.Errorf("Draw error. expected is %v but actual %v", exp, act)
+	}
+}
+
+func TestRemoveAt(t *testing.T) {
+
+}
+
+func TestRemoveJoker(t *testing.T) {
+	deck := Make()
+
+	deck.RemoveJoker()
+
+	for _, c := range deck.Cards {
+		if c.Suit == Joker {
+			t.Fatalf("Faital, Could not remove joker from deck.")
+		}
 	}
 }
