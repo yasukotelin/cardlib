@@ -4,8 +4,8 @@ import (
 	"testing"
 )
 
-func TestMake(t *testing.T) {
-	deck := Make()
+func TestNewDeck(t *testing.T) {
+	deck := NewDeck()
 
 	c := Card{
 		Suit:   Spade,
@@ -16,8 +16,8 @@ func TestMake(t *testing.T) {
 	}
 }
 
-func TestMakeSuitSet(t *testing.T) {
-	deck := MakeSuitSet(Heart)
+func TestNewDeckWithSuitSet(t *testing.T) {
+	deck := NewDeckWithSuitSet(Heart)
 
 	c := Card{
 		Suit:   Heart,
@@ -29,7 +29,7 @@ func TestMakeSuitSet(t *testing.T) {
 }
 
 func TestDraw(t *testing.T) {
-	deck := Make()
+	deck := NewDeck()
 
 	expNum := len(deck.Cards) - 1
 	expCard := deck.Cards[deck.TopIndex()]
@@ -46,7 +46,7 @@ func TestDraw(t *testing.T) {
 }
 
 func TestDrawAt(t *testing.T) {
-	deck := Make()
+	deck := NewDeck()
 
 	act, err := deck.DrawAt(12)
 	exp := Card{
@@ -61,14 +61,37 @@ func TestDrawAt(t *testing.T) {
 	if *act != exp {
 		t.Errorf("Draw error. expected is %v but actual %v", exp, act)
 	}
+
+	if deck.Exists(act) {
+		t.Errorf("%v should be removed from the deck", *act)
+	}
 }
 
-func TestRemoveAt(t *testing.T) {
+func TestExists(t *testing.T) {
+	deck := NewDeck()
+	deck.DrawAt(12)
 
+	card := &Card{
+		Number: 13,
+		Suit:   Spade,
+	}
+
+	if deck.Exists(card) {
+		t.Errorf("%v should be removed from the deck", *card)
+	}
+
+	card = &Card{
+		Number: 2,
+		Suit:   Heart,
+	}
+
+	if !deck.Exists(card) {
+		t.Errorf("%v should be exists in the deck", *card)
+	}
 }
 
 func TestRemoveJoker(t *testing.T) {
-	deck := Make()
+	deck := NewDeck()
 
 	deck.RemoveJoker()
 

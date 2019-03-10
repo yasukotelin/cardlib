@@ -12,7 +12,7 @@ const (
 
 func main() {
 	fmt.Printf("\n%v > Make new deck!\n", gopher)
-	d := cardlib.Make()
+	d := cardlib.NewDeck()
 	printlnAllCards(&d.Cards)
 
 	fmt.Printf("\n%v > shuffle shuffle\n", gopher)

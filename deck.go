@@ -17,8 +17,8 @@ type Deck struct {
 	Cards []Card
 }
 
-// Make returns complete new deck
-func Make() *Deck {
+// NewDeck returns complete new deck
+func NewDeck() *Deck {
 	var cards []Card
 	for i := 0; i < suitKindNum; i++ {
 		for j := 1; j <= suitSetNum; j++ {
@@ -39,8 +39,8 @@ func Make() *Deck {
 	}
 }
 
-// MakeSuitSet returns new deck maked only suit of arg
-func MakeSuitSet(suit Suit) *Deck {
+// NewDeckWithSuitSet returns new deck maked only suit of arg
+func NewDeckWithSuitSet(suit Suit) *Deck {
 	var cards []Card
 	for i := 1; i <= suitSetNum; i++ {
 		cards = append(cards, Card{
@@ -71,6 +71,23 @@ func (d *Deck) Shuffle() {
 	}
 }
 
+func (d *Deck) Cut() {
+	// unimplemented
+}
+
+func (d *Deck) CutAt() error {
+	// unimplemented
+	return nil
+}
+
+func (d *Deck) Add() {
+	// unimplemented
+}
+
+func (d *Deck) AddAt(index int) {
+	// unimplemented
+}
+
 // Draw top card from deck. Top card is 0 index of cards slice.
 func (d *Deck) Draw() *Card {
 	c := d.Cards[d.TopIndex()]
@@ -86,19 +103,29 @@ func (d *Deck) DrawAt(index int) (*Card, error) {
 		return nil, fmt.Errorf("out of index error. index is %d", index)
 	}
 	c := d.Cards[index]
-	d.RemoveAt(index)
+	d.removeAt(index)
 	return &c, nil
 }
 
-// RemoveAt is remove card at index from deck
+// removeAt is remove card at index from deck
 // index is started from 0
-func (d *Deck) RemoveAt(index int) error {
+func (d *Deck) removeAt(index int) error {
 	len := len(d.Cards)
 	if index < 0 || index > len {
 		return fmt.Errorf("out of index error. index is %d", index)
 	}
 	d.Cards = append(d.Cards[:index], d.Cards[index+1:]...)
 	return nil
+}
+
+// Exists is return whether exists the same card in the deck
+func (d *Deck) Exists(card *Card) bool {
+	for _, c := range d.Cards {
+		if c == *card {
+			return true
+		}
+	}
+	return false
 }
 
 // RemoveJoker is remove all joker from deck
