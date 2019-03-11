@@ -71,21 +71,33 @@ func (d *Deck) Shuffle() {
 	}
 }
 
+// Cut is cut the deck at random index
 func (d *Deck) Cut() {
-	// unimplemented
+	rand.Seed(time.Now().UnixNano())
+	i := rand.Intn(len(d.Cards))
+	d.CutAt(i)
 }
 
-func (d *Deck) CutAt() error {
-	// unimplemented
+// CutAt is cut the deck at specified index
+// index is started from 0
+func (d *Deck) CutAt(index int) error {
+	if index < 0 || len(d.Cards) <= index {
+		return fmt.Errorf("%d is Out of index", index)
+	}
+	tTmp := d.Cards[:index+1]
+	bTmp := d.Cards[index+1:]
+	d.Cards = append(bTmp, tTmp...)
 	return nil
 }
 
+// Add is add the card to top of the deck
 func (d *Deck) Add() {
-	// unimplemented
+	// not implemented yet
 }
 
+// AddAt is add the card to specified index of the deck
 func (d *Deck) AddAt(index int) {
-	// unimplemented
+	// not implemented yet
 }
 
 // Draw top card from deck. Top card is 0 index of cards slice.

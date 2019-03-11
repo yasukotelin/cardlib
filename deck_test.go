@@ -28,6 +28,37 @@ func TestNewDeckWithSuitSet(t *testing.T) {
 	}
 }
 
+func TestCutAt(t *testing.T) {
+	deck := NewDeck()
+	index := 12
+	err := deck.CutAt(index)
+
+	if err != nil {
+		t.Errorf("return error value should be nil. but actual is %v", err)
+	}
+
+	card := Card{
+		Number: 1,
+		Suit:   Club,
+	}
+
+	if card != deck.Cards[deck.TopIndex()] {
+		t.Errorf("error, expected is %v, but actual is %v", card, deck.Cards[deck.TopIndex()])
+	}
+
+	err = deck.CutAt(-1)
+
+	if err == nil {
+		t.Error("return error value should be not nil")
+	}
+
+	err = deck.CutAt(len(deck.Cards))
+
+	if err == nil {
+		t.Error("return error value should be not nil")
+	}
+}
+
 func TestDraw(t *testing.T) {
 	deck := NewDeck()
 
