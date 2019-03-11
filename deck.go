@@ -95,13 +95,25 @@ func (d *Deck) CutAt(index int) error {
 }
 
 // Add is add the card to top of the deck
-func (d *Deck) Add() {
-	// not implemented yet
+func (d *Deck) Add(card *Card) {
+	d.AddAt(card, d.TopIndex())
 }
 
 // AddAt is add the card to specified index of the deck
-func (d *Deck) AddAt(index int) {
-	// not implemented yet
+func (d *Deck) AddAt(card *Card, index int) error {
+	if index < 0 || len(d.Cards) < index {
+		return fmt.Errorf("%d is Out of index", index)
+	}
+	var new []Card
+	tTmp := d.Cards[:index]
+	bTmp := d.Cards[index:]
+	new = append(new, tTmp...)
+	new = append(new, *card)
+	new = append(new, bTmp...)
+
+	d.Cards = new
+
+	return nil
 }
 
 // Draw top card from deck. Top card is 0 index of cards slice.

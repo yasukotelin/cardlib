@@ -59,6 +59,25 @@ func TestCutAt(t *testing.T) {
 	}
 }
 
+func TestAddAt(t *testing.T) {
+	deck := NewDeck()
+	card := deck.Draw()
+
+	err := deck.AddAt(card, 13)
+
+	if err != nil {
+		t.Error("return error value should be nil")
+	}
+
+	if len(deck.Cards) != 54 {
+		t.Errorf("the card number should be 52, but acutal number is %v", len(deck.Cards))
+	}
+
+	if deck.Cards[13] != *card {
+		t.Errorf("Add failed, expected %v but actual is %v", card, deck.Cards[13])
+	}
+}
+
 func TestDraw(t *testing.T) {
 	deck := NewDeck()
 
