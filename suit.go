@@ -4,6 +4,8 @@ import (
 	"github.com/kyokomi/emoji"
 )
 
+// Suit is card mark
+// Spade, Club, Diamond, Heard and Joker
 type Suit int
 
 const (

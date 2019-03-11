@@ -53,10 +53,14 @@ func NewDeckWithSuitSet(suit Suit) *Deck {
 	}
 }
 
+// TopIndex is return top of the deck.
+// The top is 0 index of slice.
 func (d *Deck) TopIndex() int {
 	return 0
 }
 
+// BottomIndex is return bottom of the deck.
+// The bottom is last index of slice.
 func (d *Deck) BottomIndex() int {
 	return len(d.Cards) - 1
 }
