@@ -15,6 +15,7 @@ const (
 // Deck is card set struct.
 type Deck struct {
 	Cards []Card
+	rand  *rand.Rand
 }
 
 // NewDeck returns complete new deck
@@ -36,6 +37,7 @@ func NewDeck() *Deck {
 	}
 	return &Deck{
 		Cards: cards,
+		rand:  rand.New(rand.NewSource(time.Now().UnixNano())),
 	}
 }
 
@@ -65,20 +67,31 @@ func (d *Deck) BottomIndex() int {
 	return len(d.Cards) - 1
 }
 
-// Shuffle the deck. The algorythm using is Fisher–Yates shuffle
+// Seed uses the provided seed value to initialize the generator to a deterministic state.
+// This seed is used with shuffle and cut and so on functions.
+// Default seed is initialize by unix time.
+func (d *Deck) Seed(seed int64) {
+	d.rand.Seed(seed)
+}
+
+// Shuffle the deck. The algorythm using is Fisher–Yates shuffle.
+// This function uses *Rand#Intn in math/rand packge.
+// If you would like to use any other seed, you should be set to seed before
+// call this function.
 func (d *Deck) Shuffle() {
-	rand.Seed(time.Now().UnixNano())
 	n := len(d.Cards)
 	for i := n - 1; i >= 0; i-- {
-		j := rand.Intn(i + 1)
+		j := d.rand.Intn(i + 1)
 		d.Cards[i], d.Cards[j] = d.Cards[j], d.Cards[i]
 	}
 }
 
 // Cut is cut the deck at random index
+// This function uses *Rand#Intn in math/rand packge.
+// If you would like to use any other seed, you should be set to seed before
+// call this function.
 func (d *Deck) Cut() {
-	rand.Seed(time.Now().UnixNano())
-	i := rand.Intn(len(d.Cards))
+	i := d.rand.Intn(len(d.Cards))
 	d.CutAt(i)
 }
 
