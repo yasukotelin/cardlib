@@ -2,6 +2,8 @@ package main
 
 import (
 	"fmt"
+	"math/rand"
+	"time"
 
 	"github.com/yasukotelin/cardlib"
 )
@@ -11,6 +13,8 @@ const (
 )
 
 func main() {
+	rand.Seed(time.Now().UnixNano())
+
 	fmt.Printf("\n%v > Make new deck!\n", gopher)
 	d := cardlib.NewDeck()
 	printlnAllCards(&d.Cards)

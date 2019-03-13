@@ -23,11 +23,17 @@ package main
 
 import (
 	"fmt"
+	"math/rand"
+	"time"
 
 	"github.com/yasukotelin/cardlib"
 )
 
 func main() {
+	// set the seed value to global random generator.
+	// cardlib uses it for shuffle and cut and so on.
+	rand.Seed(time.Now().UnixNano())
+
 	// create the complete deck
 	deck := cardlib.NewDeck()
 
