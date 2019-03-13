@@ -52,6 +52,7 @@ func NewDeckWithSuitSet(suit Suit) *Deck {
 	}
 	return &Deck{
 		Cards: cards,
+		rand:  rand.New(rand.NewSource(time.Now().UnixNano())),
 	}
 }
 
